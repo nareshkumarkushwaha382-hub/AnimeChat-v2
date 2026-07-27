@@ -1,1 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>AnimeChat</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="style.css">
+
+</head>
+
+<body>
+
+<script src="config.js"></script>
+
+<script src="firebase.js"></script>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
+<!-- =========================================
+     Splash Screen
+========================================= -->
+
+<div id="splashScreen">
+
+    <div class="splashContent">
+
+        <div class="logoCircle">
+
+            💙
+
+        </div>
+
+        <h1>AnimeChat</h1>
+
+        <p>
+            Connect with Friends & AI
+        </p>
+
+    </div>
+
+</div>
+
+<!-- =========================================
+     Login Screen
+========================================= -->
+
+<div id="loginScreen">
+
+    <div class="loginCard">
+
+        <div class="loginLogo">
+
+            💙
+
+        </div>
+
+        <h2>Welcome to AnimeChat</h2>
+
+        <p>
+            Sign in with your Google Account
+        </p>
+
+        <button id="googleLoginButton">
+
+            <span>🟢</span>
+
+            Continue with Google
+
+        </button>
+
+    </div>
+
+</div>
+<!-- =========================================
+     Main App
+========================================= -->
+
+<div id="app" class="hidden">
+
+<div class="app">
+
+<!-- =========================================
+     Sidebar
+========================================= -->
+
+<aside class="sidebar">
+
+<div class="sidebarHeader">
+
+<div class="logo">
+
+<div class="logoIcon">💙</div>
+
+<h2>AnimeChat</h2>
+
+</div>
+
+<div class="headerButtons">
+
+<button id="newChatButton">💬</button>
+
+<button id="friendButton">👥</button>
+
+<button id="settingButton">⚙️</button>
+
+</div>
+
+</div>
+
+<div class="searchContainer">
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search chats...">
+
+</div>
+
+<div
+class="contactList"
+id="contactList">
+
+<!-- Contacts will be added by JavaScript -->
+
+</div>
+
+</aside>
+
+<!-- =========================================
+     Chat Area
+========================================= -->
+
+<section class="chatContainer">
+
+<div class="chatHeader">
+
+<button id="backButton">
+
+←
+
+</button>
+
+<div
+class="chatAvatar"
+id="chatAvatar">
+
+💙
+
+</div>
+
+<div class="chatDetails">
+
+<h2 id="chatName">
+
+AnimeChat
+
+</h2>
+
+<p id="chatStatus">
+
+Online
+
+</p>
+
+</div>
+
+<div class="chatActions">
+
+<button id="voiceCallButton">
+
+📞
+
+</button>
+
+<button id="videoCallButton">
+
+🎥
+
+</button>
+
+<button id="chatMenuButton">
+
+⋮
+
+</button>
+
+</div>
+
+</div>
+
+<div
+class="messages"
+id="messages">
+
+<!-- Messages -->
+
+</div>
+  <!-- =========================================
+     Chat Input
+========================================= -->
+
+<div class="chatInput">
+
+<button id="emojiButton">
+
+😊
+
+</button>
+
+<input
+type="text"
+id="messageInput"
+placeholder="Type a message...">
+
+<button id="attachmentButton">
+
+📎
+
+</button>
+
+<button id="cameraButton">
+
+📷
+
+</button>
+
+<button id="sendButton">
+
+➤
+
+</button>
+
+</div>
+
+</section>
+
+<!-- =========================================
+     Bottom Navigation
+========================================= -->
+
+<nav class="bottomNavigation">
+
+<button id="navChats">
+
+💬
+
+<span>Chats</span>
+
+</button>
+
+<button id="navFriends">
+
+👥
+
+<span>Friends</span>
+
+</button>
+
+<button id="navAI">
+
+🤖
+
+<span>AI</span>
+
+</button>
+
+<button id="navProfile">
+
+👤
+
+<span>Profile</span>
+
+</button>
+
+</nav>
+
+</div>
+
+</div>
+<!-- =========================================
+     Friends Page
+========================================= -->
+
+<div id="friendsPage" class="page hidden">
+
+<div class="pageHeader">
+
+<button class="backPage">←</button>
+
+<h2>Friends</h2>
+
+</div>
+
+<div class="pageContent">
+
+<input
+type="text"
+id="friendSearch"
+placeholder="Search username...">
+
+<div id="friendList"></div>
+
+</div>
+
+</div>
+
+<!-- =========================================
+     AI Page
+========================================= -->
+
+<div id="aiPage" class="page hidden">
+
+<div class="pageHeader">
+
+<button class="backPage">←</button>
+
+<h2>AI Characters</h2>
+
+</div>
+
+<div class="pageContent">
+
+<div id="aiList"></div>
+
+</div>
+
+</div>
+
+<!-- =========================================
+     Profile Page
+========================================= -->
+
+<div id="profilePage" class="page hidden">
+
+<div class="pageHeader">
+
+<button class="backPage">←</button>
+
+<h2>Profile</h2>
+
+</div>
+
+<div class="pageContent">
+
+<div class="profileCard">
+
+<div id="profileAvatar">
+
+👤
+
+</div>
+
+<h2 id="profileName">
+
+AnimeChat User
+
+</h2>
+
+<p id="profileUsername">
+
+@username
+
+</p>
+
+</div>
+
+<button id="editProfileButton">
+
+Edit Profile
+
+</button>
+
+<button id="logoutButton">
+
+Logout
+
+</button>
+
+</div>
+
+</div>
+
+<!-- =========================================
+     Settings Page
+========================================= -->
+
+<div id="settingsPage" class="page hidden">
+
+<div class="pageHeader">
+
+<button class="backPage">←</button>
+
+<h2>Settings</h2>
+
+</div>
+
+<div class="pageContent">
+
+<button id="themeButton">
+
+Theme
+
+</button>
+
+<button id="notificationButton">
+
+Notifications
+
+</button>
+
+<button id="privacyButton">
+
+Privacy
+
+</button>
+
+<button id="aboutButton">
+
+About
+
+</button>
+
+</div>
+
+</div>
+
+<!-- =========================================
+     Incoming Call
+========================================= -->
+
+<div id="incomingCall" class="page hidden">
+
+<div class="callScreen">
+
+<div id="incomingAvatar">
+
+👤
+
+</div>
+
+<h2 id="incomingName">
+
+Unknown
+
+</h2>
+
+<p>
+
+Incoming Call...
+
+</p>
+
+<div class="callButtons">
+
+<button id="rejectCall">
+
+❌
+
+</button>
+
+<button id="acceptCall">
+
+📞
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =========================================
+     Voice / Video Call
+========================================= -->
+
+<div id="callPage" class="page hidden">
+
+<div class="callScreen">
+
+<div id="callAvatar">
+
+👤
+
+</div>
+
+<h2 id="callName">
+
+Calling...
+
+</h2>
+
+<p id="callStatus">
+
+Connecting...
+
+</p>
+
+<div class="callButtons">
+
+<button id="muteButton">
+
+🎤
+
+</button>
+
+<button id="speakerButton">
+
+🔊
+
+</button>
+
+<button id="cameraToggleButton">
+
+📷
+
+</button>
+
+<button id="endCallButton">
+
+📞
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =========================================
+     Popups
+========================================= -->
+
+<div id="emojiPopup" class="popup hidden"></div>
+
+<div id="attachmentPopup" class="popup hidden"></div>
+
+<div id="menuPopup" class="popup hidden"></div>
+
+<div id="notificationContainer"></div>
