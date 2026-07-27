@@ -173,3 +173,46 @@ contactList.appendChild(card);
 });
 
 }
+function renderMessages(){
+
+messages.innerHTML="";
+
+currentChat.messages.forEach(message=>{
+
+const bubble=document.createElement("div");
+
+bubble.className="message "+message.sender;
+
+bubble.innerHTML=`
+
+<div>${message.text}</div>
+
+<div class="messageTime">
+
+${message.time}
+
+</div>
+
+`;
+
+messages.appendChild(bubble);
+
+});
+
+messages.scrollTop=messages.scrollHeight;
+
+}
+
+function openChat(contact){
+
+currentChat=contact;
+
+chatName.textContent=contact.name;
+
+chatAvatar.textContent=contact.avatar;
+
+chatStatus.textContent=contact.status;
+
+renderMessages();
+
+}
