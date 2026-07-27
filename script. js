@@ -270,3 +270,14 @@ renderMessages();
 },1000);
 
 }
+sendButton.addEventListener("click",sendMessage);
+
+messageInput.addEventListener("keydown",e=>{
+
+if(e.key==="Enter"){
+
+sendMessage();
+
+}
+
+});
