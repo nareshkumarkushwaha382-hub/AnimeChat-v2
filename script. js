@@ -18,6 +18,8 @@ const loginScreen=document.getElementById("loginScreen");
 const app=document.getElementById("app");
 
 const googleLoginButton=document.getElementById("googleLoginButton");
+const messageInput = document.getElementById("messageInput");
+const sendButton = document.getElementById("sendButton");
 
 /* ========= START ========= */
 
