@@ -54,41 +54,77 @@ const chatAvatar = document.getElementById("chatAvatar");
 const chatStatus = document.getElementById("chatStatus");
 const messages = document.getElementById("messages");
 
-const contacts = [
+const contacts=[
 
 {
+
 name:"Rem",
+
 avatar:"💙",
+
 status:"Online",
-lastMessage:"Good morning!",
-time:"09:42"
+
+time:"09:42",
+
+messages:[
+
+{sender:"bot",text:"Hello 👋",time:"09:40"},
+
+{sender:"user",text:"Hi Rem!",time:"09:41"}
+
+]
+
 },
 
 {
+
 name:"Gojo",
+
 avatar:"👑",
+
 status:"Online",
-lastMessage:"Yo!",
-time:"08:30"
+
+time:"08:30",
+
+messages:[
+
+{sender:"bot",text:"Yo!",time:"08:20"}
+
+]
+
 },
 
 {
+
 name:"Subaru",
+
 avatar:"⚔️",
+
 status:"Typing...",
-lastMessage:"",
-time:"Now"
+
+time:"Now",
+
+messages:[]
+
 },
 
 {
+
 name:"Friend",
+
 avatar:"👤",
+
 status:"Offline",
-lastMessage:"See you later.",
-time:"Yesterday"
+
+time:"Yesterday",
+
+messages:[]
+
 }
 
 ];
+
+let currentChat=contacts[0];
 
 /* ========= RENDER CONTACTS ========= */
 
