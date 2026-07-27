@@ -49,6 +49,10 @@ console.log("User entered AnimeChat");
 /* ========= CONTACT DATA ========= */
 
 const contactList = document.getElementById("contactList");
+const chatName = document.getElementById("chatName");
+const chatAvatar = document.getElementById("chatAvatar");
+const chatStatus = document.getElementById("chatStatus");
+const messages = document.getElementById("messages");
 
 const contacts = [
 
