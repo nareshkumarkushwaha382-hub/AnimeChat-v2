@@ -1,1 +1,135 @@
+"use strict";
 
+/* ==========================================
+   AnimeChat v2
+   JavaScript 1A
+========================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+console.log("AnimeChat v2 Started");
+
+/* ========= DOM ========= */
+
+const splashScreen=document.getElementById("splashScreen");
+
+const loginScreen=document.getElementById("loginScreen");
+
+const app=document.getElementById("app");
+
+const googleLoginButton=document.getElementById("googleLoginButton");
+
+/* ========= START ========= */
+
+app.classList.add("hidden");
+
+loginScreen.classList.add("hidden");
+
+setTimeout(()=>{
+
+splashScreen.classList.add("hidden");
+
+loginScreen.classList.remove("hidden");
+
+},2000);
+
+/* ========= LOGIN ========= */
+
+googleLoginButton.addEventListener("click",()=>{
+
+loginScreen.classList.add("hidden");
+
+app.classList.remove("hidden");
+
+console.log("User entered AnimeChat");
+
+});
+
+});
+/* ========= CONTACT DATA ========= */
+
+const contactList = document.getElementById("contactList");
+
+const contacts = [
+
+{
+name:"Rem",
+avatar:"💙",
+status:"Online",
+lastMessage:"Good morning!",
+time:"09:42"
+},
+
+{
+name:"Gojo",
+avatar:"👑",
+status:"Online",
+lastMessage:"Yo!",
+time:"08:30"
+},
+
+{
+name:"Subaru",
+avatar:"⚔️",
+status:"Typing...",
+lastMessage:"",
+time:"Now"
+},
+
+{
+name:"Friend",
+avatar:"👤",
+status:"Offline",
+lastMessage:"See you later.",
+time:"Yesterday"
+}
+
+];
+
+/* ========= RENDER CONTACTS ========= */
+
+function renderContacts(){
+
+contactList.innerHTML="";
+
+contacts.forEach(contact=>{
+
+const card=document.createElement("div");
+
+card.className="contact";
+
+card.innerHTML=`
+
+<div class="contactAvatar">
+
+${contact.avatar}
+
+</div>
+
+<div class="contactInfo">
+
+<h3>${contact.name}</h3>
+
+<p>${contact.lastMessage || contact.status}</p>
+
+</div>
+
+<div class="contactTime">
+
+${contact.time}
+
+</div>
+
+`;
+
+card.addEventListener("click",()=>{
+
+console.log("Open chat:",contact.name);
+
+});
+
+contactList.appendChild(card);
+
+});
+
+}
