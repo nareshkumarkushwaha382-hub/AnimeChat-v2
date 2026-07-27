@@ -233,3 +233,40 @@ minute:"2-digit"
 });
 
 }
+function sendMessage(){
+
+const text=messageInput.value.trim();
+
+if(text==="") return;
+
+currentChat.messages.push({
+
+sender:"user",
+
+text:text,
+
+time:getTime()
+
+});
+
+messageInput.value="";
+
+renderMessages();
+
+setTimeout(()=>{
+
+currentChat.messages.push({
+
+sender:"bot",
+
+text:"This is a demo reply.",
+
+time:getTime()
+
+});
+
+renderMessages();
+
+},1000);
+
+}
