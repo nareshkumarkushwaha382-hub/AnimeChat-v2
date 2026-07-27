@@ -216,5 +216,20 @@ chatAvatar.textContent=contact.avatar;
 chatStatus.textContent=contact.status;
 
 renderMessages();
+const messageInput = document.getElementById("messageInput");
+const sendButton = document.getElementById("sendButton");
+
+}
+function getTime(){
+
+const now=new Date();
+
+return now.toLocaleTimeString([],{
+
+hour:"2-digit",
+
+minute:"2-digit"
+
+});
 
 }
