@@ -3,36 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnimeChat</title>
+    <title>AnimeChat - WhatsApp Style</title>
     <link rel="stylesheet" href="style.css">
-    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="app-container">
-        <!-- Sidebar -->
+        <!-- Sidebar (Chat List) -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="app-brand">
-                    <i class="fa-solid fa-comments"></i>
-                    <h2>AnimeChat</h2>
+                <div class="user-profile-avatar">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" alt="My Profile">
+                </div>
+                <div class="sidebar-header-actions">
+                    <button class="icon-btn" title="Status"><i class="fa-solid fa-circle-notch"></i></button>
+                    <button class="icon-btn" title="New Chat"><i class="fa-solid fa-comment-alt"></i></button>
+                    <button class="icon-btn" title="Menu"><i class="fa-solid fa-ellipsis-vertical"></i></button>
                 </div>
                 <button class="mobile-close-btn" id="mobileCloseBtn"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
             <div class="search-container">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="searchInput" placeholder="Search characters...">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="searchInput" placeholder="Search or start new chat">
+                </div>
+                <button class="icon-btn filter-btn"><i class="fa-solid fa-filter"></i></button>
             </div>
 
             <div class="contact-list" id="contactList">
-                <!-- Contacts populated dynamically via JS -->
+                <!-- Contacts populated dynamically -->
             </div>
         </aside>
 
         <!-- Main Chat Area -->
         <main class="chat-area" id="chatArea">
-            <!-- Chat Header -->
             <header class="chat-header">
                 <div class="chat-header-user">
                     <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fa-solid fa-bars"></i></button>
@@ -42,27 +47,33 @@
                     </div>
                     <div class="user-info">
                         <h3 id="activeName">Select a chat</h3>
-                        <p id="activeStatus">Online</p>
+                        <p id="activeStatus">online</p>
                     </div>
                 </div>
                 <div class="chat-header-actions">
-                    <button class="action-btn" id="audioCallBtn" title="Audio Call"><i class="fa-solid fa-phone"></i></button>
-                    <button class="action-btn" id="videoCallBtn" title="Video Call"><i class="fa-solid fa-video"></i></button>
+                    <button class="icon-btn" id="videoCallBtn" title="Video Call"><i class="fa-solid fa-video"></i></button>
+                    <button class="icon-btn" id="audioCallBtn" title="Voice Call"><i class="fa-solid fa-phone"></i></button>
+                    <span class="separator"></span>
+                    <button class="icon-btn" title="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <button class="icon-btn" title="Menu"><i class="fa-solid fa-ellipsis-vertical"></i></button>
                 </div>
             </header>
 
-            <!-- Message History -->
+            <!-- Message History / Chat Wall -->
             <div class="message-container" id="messageContainer">
                 <div class="empty-chat-state">
-                    <i class="fa-regular fa-comment-dots"></i>
-                    <p>Choose an anime character from the sidebar to start chatting!</p>
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <h2>AnimeChat for Web</h2>
+                    <p>Send and receive messages with your favorite anime characters without keeping your phone online.</p>
                 </div>
             </div>
 
-            <!-- Message Input Form -->
+            <!-- Message Input Footer -->
             <form class="message-input-form" id="messageForm">
-                <input type="text" id="messageInput" placeholder="Type a message..." autocomplete="off" disabled>
-                <button type="submit" id="sendBtn" disabled><i class="fa-solid fa-paper-plane"></i></button>
+                <button type="button" class="icon-btn" title="Emoji"><i class="fa-regular fa-face-smile"></i></button>
+                <button type="button" class="icon-btn" title="Attach"><i class="fa-solid fa-paperclip"></i></button>
+                <input type="text" id="messageInput" placeholder="Type a message" autocomplete="off" disabled>
+                <button type="submit" id="sendBtn" class="send-btn" disabled><i class="fa-solid fa-paper-plane"></i></button>
             </form>
         </main>
     </div>
