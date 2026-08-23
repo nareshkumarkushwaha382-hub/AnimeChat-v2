@@ -1,9 +1,8 @@
-// Initial Characters Data
-const initialCharacters = [
+ const initialCharacters = [
     {
         id: 'ciel',
         name: 'Ciel Phantomhive',
-        status: 'Online',
+        status: 'online',
         avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
         preview: 'Check the latest case report.',
         responses: [
@@ -16,7 +15,7 @@ const initialCharacters = [
     {
         id: 'subaru',
         name: 'Subaru Natsuki',
-        status: 'Online',
+        status: 'online',
         avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150',
         preview: 'Emilia-tan is amazing!',
         responses: [
@@ -29,7 +28,7 @@ const initialCharacters = [
     {
         id: 'emilia',
         name: 'Emilia',
-        status: 'Online',
+        status: 'online',
         avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150',
         preview: 'Thank you for your help today.',
         responses: [
@@ -42,7 +41,7 @@ const initialCharacters = [
     {
         id: 'sebastian',
         name: 'Sebastian Michaelis',
-        status: 'Online',
+        status: 'online',
         avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150',
         preview: 'I am simply one hell of a butler.',
         responses: [
@@ -54,7 +53,6 @@ const initialCharacters = [
     }
 ];
 
-// App State
 let characters = JSON.parse(localStorage.getItem('animechat_characters')) || initialCharacters;
 let chatHistories = JSON.parse(localStorage.getItem('animechat_histories')) || {};
 let activeCharId = null;
@@ -64,7 +62,6 @@ let callSeconds = 0;
 let isMuted = false;
 let isVideoOn = false;
 
-// DOM Elements
 const sidebar = document.getElementById('sidebar');
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const mobileCloseBtn = document.getElementById('mobileCloseBtn');
@@ -78,7 +75,6 @@ const messageForm = document.getElementById('messageForm');
 const messageInput = document.getElementById('messageInput');
 const sendBtn = document.getElementById('sendBtn');
 
-// Call Modal Elements
 const callModal = document.getElementById('callModal');
 const callAvatar = document.getElementById('callAvatar');
 const callName = document.getElementById('callName');
@@ -90,19 +86,17 @@ const muteBtn = document.getElementById('muteBtn');
 const endCallBtn = document.getElementById('endCallBtn');
 const videoToggleBtn = document.getElementById('videoToggleBtn');
 
-// Initialize App
 function init() {
     renderContacts();
     setupEventListeners();
 }
 
-// Render Contact List with Search Filter
 function renderContacts(filter = '') {
     contactList.innerHTML = '';
     const filtered = characters.filter(c => c.name.toLowerCase().includes(filter.toLowerCase()));
 
     if (filtered.length === 0) {
-        contactList.innerHTML = `<div style="padding: 20px; text-align: center; color: var(--text-muted);">No characters found</div>`;
+        contactList.innerHTML = `<div style="padding: 20px; text-align: center; color: var(--wa-text-muted);">No chats found</div>`;
         return;
     }
 
@@ -136,7 +130,6 @@ function renderContacts(filter = '') {
     });
 }
 
-// Select Active Character
 function selectCharacter(id) {
     activeCharId = id;
     const char = characters.find(c => c.id === id);
@@ -154,7 +147,6 @@ function selectCharacter(id) {
     renderMessages();
 }
 
-// Render Messages for Active Chat
 function renderMessages() {
     messageContainer.innerHTML = '';
     if (!activeCharId) return;
@@ -163,8 +155,9 @@ function renderMessages() {
     if (history.length === 0) {
         messageContainer.innerHTML = `
             <div class="empty-chat-state">
-                <i class="fa-regular fa-comment-dots"></i>
-                <p>Say hello to start the conversation!</p>
+                <i class="fa-brands fa-whatsapp"></i>
+                <h2>AnimeChat for Web</h2>
+                <p>Send a message to begin your conversation with this character.</p>
             </div>
         `;
         return;
@@ -173,16 +166,17 @@ function renderMessages() {
     history.forEach(msg => {
         const div = document.createElement('div');
         div.className = `message ${msg.sender}`;
+        
+        let ticks = msg.sender === 'sent' ? `<i class="fa-solid fa-check-double"></i>` : '';
         div.innerHTML = `
             ${msg.text}
-            <span class="message-time">${msg.time}</span>
+            <span class="message-time">${msg.time} ${ticks}</span>
         `;
         messageContainer.appendChild(div);
     });
     messageContainer.scrollTop = messageContainer.scrollHeight;
 }
 
-// Send Message & Trigger AI Response
 function handleSendMessage(e) {
     e.preventDefault();
     const text = messageInput.value.trim();
@@ -190,7 +184,6 @@ function handleSendMessage(e) {
 
     const timeStr = getCurrentTime();
 
-    // Push User Message
     if (!chatHistories[activeCharId]) chatHistories[activeCharId] = [];
     chatHistories[activeCharId].push({ sender: 'sent', text, time: timeStr });
     
@@ -199,7 +192,6 @@ function handleSendMessage(e) {
     renderMessages();
     renderContacts(searchInput.value);
 
-    // Simulate Character AI Response
     setTimeout(() => {
         const char = characters.find(c => c.id === activeCharId);
         const randomResp = char.responses[Math.floor(Math.random() * char.responses.length)];
@@ -211,7 +203,6 @@ function handleSendMessage(e) {
     }, 1000);
 }
 
-// Call Feature Handlers
 function startCall(type) {
     if (!activeCharId) return;
     currentCallType = type;
@@ -219,14 +210,13 @@ function startCall(type) {
 
     callAvatar.src = char.avatar;
     callName.textContent = char.name;
-    callStatus.textContent = type === 'audio' ? 'Calling audio...' : 'Calling video...';
+    callStatus.textContent = type === 'audio' ? 'Calling...' : 'Video calling...';
     callTimer.textContent = '00:00';
     callModal.classList.add('active');
 
     videoToggleBtn.style.display = type === 'video' ? 'flex' : 'none';
     callSeconds = 0;
 
-    // Simulate connecting after 2 seconds
     setTimeout(() => {
         if (!callModal.classList.contains('active')) return;
         callStatus.textContent = 'Connected';
@@ -252,7 +242,6 @@ function startTimer() {
     }, 1000);
 }
 
-// Utility Helpers
 function getCurrentTime() {
     const now = new Date();
     return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -262,7 +251,6 @@ function saveData() {
     localStorage.setItem('animechat_histories', JSON.stringify(chatHistories));
 }
 
-// Event Listeners Setup
 function setupEventListeners() {
     messageForm.addEventListener('submit', handleSendMessage);
     
@@ -274,7 +262,7 @@ function setupEventListeners() {
     mobileCloseBtn.addEventListener('click', () => sidebar.classList.remove('mobile-open'));
 
     audioCallBtn.addEventListener('click', () => startCall('audio'));
-    videoCallBtn.addEventListener('click', () => endCall && startCall('video'));
+    videoCallBtn.addEventListener('click', () => startCall('video'));
     endCallBtn.addEventListener('click', endCall);
 
     muteBtn.addEventListener('click', () => {
@@ -290,5 +278,4 @@ function setupEventListeners() {
     });
 }
 
-// Run on Load
 init();
